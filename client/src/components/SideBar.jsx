@@ -53,7 +53,15 @@ const SideBar = ({ selectedUser, setSelectedUser }) => {
       <div className="flex flex-col ">
         {userDummyData.map((user, index) => {
           return (
-            <div>
+            <div
+              onClick={() => {
+                setSelectedUser(user);
+              }}
+              key={index}
+              className={`relative flex items-center gap-2 p-2 pl-4 rounded cursor-pointer max-sm:text-sm ${
+                selectedUser?._id === user._id && "bg-[#282142]/50"
+              }`}
+            >
               <img
                 src={user?.profilePic || assets.avatar_icon}
                 alt="profile pic"
@@ -70,6 +78,12 @@ const SideBar = ({ selectedUser, setSelectedUser }) => {
                   <span className="text-neutral-400">Offline</span>
                 )}
               </div>
+
+              {index > 2 && (
+                <p className="absolute top-4 right-4 text-xs h-5 w-5 flex justify-center rounded-full bg-violet-500/50">
+                  {index}
+                </p>
+              )}
             </div>
           );
         })}
